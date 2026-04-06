@@ -348,7 +348,7 @@ namespace Lab7UI
                 "Жовтий" => Colors.Yellow,
                 "Оранжевий" => Colors.Orange,
                 "Фіолетовий" => Colors.Purple,
-                "Чорний" => Colors.Black,
+                "Білий" => Colors.White,
                 _ => Colors.Black
             };
         }

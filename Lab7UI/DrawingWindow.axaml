@@ -46,7 +46,7 @@
                     <ComboBoxItem Content="Жовтий" Tag="Yellow"/>
                     <ComboBoxItem Content="Оранжевий" Tag="Orange"/>
                     <ComboBoxItem Content="Фіолетовий" Tag="Purple"/>
-                    <ComboBoxItem Content="Чорний" Tag="Black"/>
+                    <ComboBoxItem Content="Білий" Tag="White"/>
                 </ComboBox>
             </StackPanel>
             
