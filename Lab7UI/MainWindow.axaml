@@ -1,26 +1,19 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2004/xaml"
-        x:Class="Lab7CSharp.task_1.MainWindow"
+        x:Class="Lab7UI.MainWindow"
         Title="Керування списком" Width="400" Height="250"
         WindowStartupLocation="CenterScreen">
-
     <StackPanel Margin="20" Spacing="10">
         <TextBlock Text="Введіть елемент:" FontWeight="Bold"/>
-        
-        <TextBox Name="InputTextBox" Watermark="Назва елемента..."/>
-
+        <TextBox x:Name="InputTextBox" Watermark="Назва елемента..."/>
         <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
-            <Button Content="Додати" Click="OnAddClick" Width="100" 
+            <Button Content="Додати" x:Name="AddButton" Width="100" 
                     Background="LightGreen" HorizontalContentAlignment="Center"/>
-            <Button Content="Видалити" Click="OnRemoveClick" Width="100" 
+            <Button Content="Видалити" x:Name="RemoveButton" Width="100" 
                     Background="LightCoral" HorizontalContentAlignment="Center"/>
         </StackPanel>
-
         <Separator Margin="0,10"/>
-
         <TextBlock Text="Ваш список:" FontWeight="Bold"/>
-        <ComboBox Name="MyComboBox" HorizontalAlignment="Stretch">
-            <ComboBoxItem>Елемент за замовчуванням</ComboBoxItem>
-        </ComboBox>
+        <ComboBox x:Name="MyComboBox" HorizontalAlignment="Stretch" />
     </StackPanel>
 </Window>
