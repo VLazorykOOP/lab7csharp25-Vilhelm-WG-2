@@ -1,0 +1,79 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Lab7UI.DrawingWindow"
+        Title="Малювання фігур - Лабораторна робота 7" Width="800" Height="600"
+        WindowStartupLocation="CenterScreen">
+    
+    <!-- Головна сітка: ліва панель керування, права панель полотна -->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/> <!-- Ліва панель керування -->
+            <ColumnDefinition Width="5"/>   <!-- Розділювач -->
+            <ColumnDefinition Width="*"/>  <!-- Права панель полотна -->
+        </Grid.ColumnDefinitions>
+        
+        <!-- Ліва панель керування -->
+        <StackPanel Grid.Column="0" Margin="15" Spacing="15">
+            <TextBlock Text="Панель керування" FontWeight="Bold" FontSize="16" 
+                       HorizontalAlignment="Center"/>
+            
+            <Separator/>
+            
+            <!-- Вибір типу фігури -->
+            <StackPanel Spacing="5">
+                <TextBlock Text="Тип фігури:" FontWeight="SemiBold"/>
+                <ComboBox x:Name="FigureTypeComboBox" SelectedIndex="0">
+                    <ComboBoxItem Content="Квадрат"/>
+                    <ComboBoxItem Content="Прямокутник"/>
+                    <ComboBoxItem Content="Трикутник"/>
+                    <ComboBoxItem Content="Коло"/>
+                </ComboBox>
+            </StackPanel>
+            
+            <!-- Введення розміру -->
+            <StackPanel Spacing="5">
+                <TextBlock Text="Розмір (10-150):" FontWeight="SemiBold"/>
+                <TextBox x:Name="SizeTextBox" Text="50" Width="200"/>
+            </StackPanel>
+            
+            <!-- Вибір кольору -->
+            <StackPanel Spacing="5">
+                <TextBlock Text="Колір:" FontWeight="SemiBold"/>
+                <ComboBox x:Name="ColorComboBox" SelectedIndex="0">
+                    <ComboBoxItem Content="Червоний" Tag="Red"/>
+                    <ComboBoxItem Content="Зелений" Tag="Green"/>
+                    <ComboBoxItem Content="Синій" Tag="Blue"/>
+                    <ComboBoxItem Content="Жовтий" Tag="Yellow"/>
+                    <ComboBoxItem Content="Оранжевий" Tag="Orange"/>
+                    <ComboBoxItem Content="Фіолетовий" Tag="Purple"/>
+                    <ComboBoxItem Content="Чорний" Tag="Black"/>
+                </ComboBox>
+            </StackPanel>
+            
+            <!-- Кнопка додавання фігури -->
+            <Button x:Name="AddFigureButton" Content="Додати фігуру" 
+                    Background="LightGreen" Height="40" FontWeight="SemiBold"/>
+            
+            <Separator/>
+            
+            <!-- Інформація про кількість фігур -->
+            <StackPanel Spacing="5">
+                <TextBlock Text="Кількість фігур:" FontWeight="SemiBold"/>
+                <TextBlock x:Name="FigureCountTextBlock" Text="0" 
+                           FontSize="18" HorizontalAlignment="Center" FontWeight="Bold"/>
+            </StackPanel>
+            
+            <!-- Кнопка очищення полотна -->
+            <Button x:Name="ClearCanvasButton" Content="Очистити полотно" 
+                    Background="LightCoral" Height="35"/>
+        </StackPanel>
+        
+        <!-- Розділювач -->
+        <GridSplitter Grid.Column="1" Background="LightGray" HorizontalAlignment="Stretch"/>
+        
+        <!-- Права панель полотна для малювання -->
+        <Border Grid.Column="2" Margin="10" BorderBrush="Gray" BorderThickness="2">
+            <Canvas x:Name="DrawingCanvas" Background="White"/>
+        </Border>
+    </Grid>
+</Window>

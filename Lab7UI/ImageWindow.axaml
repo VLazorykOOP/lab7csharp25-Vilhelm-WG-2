@@ -1,0 +1,32 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Lab7UI.ImageWindow"
+        Title="Завдання 2: Інверсія BMP" Width="800" Height="600"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid ColumnDefinitions="250, *">
+        <StackPanel Grid.Column="0" Margin="15" Spacing="10">
+            <TextBlock Text="Керування файлом:" FontWeight="Bold" Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+    
+            <Button Content="Відкрити BMP" x:Name="OpenButton" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+            <Button Content="Зберегти BMP" x:Name="SaveButton" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+
+            <Separator Margin="0,10"/>
+
+            <TextBlock Text="Режим інверсії:" FontWeight="Bold" Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+    
+            <RadioButton x:Name="RbFull" Content="Повна інверсія" IsChecked="True" GroupName="InvGroup"/>
+            <RadioButton x:Name="RbRed" Content="Інверсія Червоного (R)" GroupName="InvGroup"/>
+            <RadioButton x:Name="RbGreen" Content="Інверсія Зеленого (G)" GroupName="InvGroup"/>
+            <RadioButton x:Name="RbBlue" Content="Інверсія Синього (B)" GroupName="InvGroup"/>
+
+            <Button Content="Застосувати" x:Name="ApplyButton" 
+                    Background="#3498db" Foreground="White"
+                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0,10,0,0"/>
+        </StackPanel>
+
+        <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Margin="15">
+            <Image x:Name="MainImage" Stretch="Uniform"/>
+        </Border>
+    </Grid>
+</Window>

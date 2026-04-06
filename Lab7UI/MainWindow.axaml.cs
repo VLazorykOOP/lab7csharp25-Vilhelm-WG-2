@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Linq;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
@@ -8,50 +9,74 @@ namespace Lab7UI
 {
     public partial class MainWindow : Window
     {
-        // ВИДАЛИЛИ ручні оголошення TextBox, ComboBox тощо. 
-        // Avalonia створила їх сама завдяки x:Name у XAML!
-
+        private TextBox? _inputTextBox;
+        private ComboBox? _myComboBox;
         private ObservableCollection<string> _myItems = new ObservableCollection<string>();
 
         public MainWindow()
         {
-            InitializeComponent(); // Цього методу достатньо!
+            // Викликаємо наш ручний метод замість стандартного
+            CustomInitialize();
 
-            // Прив'язуємо колекцію
-            _myItems.Add("Елемент за замовчуванням");
-            MyComboBox.ItemsSource = _myItems; 
+            _inputTextBox = this.FindControl<TextBox>("InputTextBox");
+            _myComboBox = this.FindControl<ComboBox>("MyComboBox");
             
-            // Підключаємо події (змінні AddButton вже існують автоматично)
-            AddButton.Click += OnAddClick;
-            RemoveButton.Click += OnRemoveClick;
+            var addButton = this.FindControl<Button>("AddButton");
+            var removeButton = this.FindControl<Button>("RemoveButton");
+            var goToBtn = this.FindControl<Button>("GoToImageTask");
+
+            if (_myComboBox != null)
+            {
+                _myItems.Add("Елемент за замовчуванням");
+                _myComboBox.ItemsSource = _myItems;
+            }
+
+            if (addButton != null) addButton.Click += OnAddClick;
+            if (removeButton != null) removeButton.Click += OnRemoveClick;
+            
+            if (goToBtn != null)
+            {
+                goToBtn.Click += (s, e) => {
+                    var imageWin = new Lab7UI.ImageWindow();
+                    imageWin.Show(); 
+                };
+            }
+            
+            var goDrawingBtn = this.FindControl<Button>("GoToDrawingTask");
+            if (goDrawingBtn != null)
+            {
+                goDrawingBtn.Click += (s, e) => {
+                    var drawingWin = new Lab7UI.DrawingWindow();
+                    drawingWin.Show(); 
+                };
+            }
+        }
+
+        // РУЧНИЙ МЕТОД ЗАВАНТАЖЕННЯ XAML
+        private void CustomInitialize()
+        {
+            AvaloniaXamlLoader.Load(this);
         }
 
         private void OnAddClick(object? sender, RoutedEventArgs e)
         {
-            // Використовуємо InputTextBox прямо, він уже існує!
-            string text = InputTextBox.Text?.Trim() ?? string.Empty;
-
+            string text = _inputTextBox?.Text?.Trim() ?? string.Empty;
             if (!string.IsNullOrEmpty(text))
             {
                 _myItems.Add(text);
-                InputTextBox.Text = string.Empty;
+                if (_inputTextBox != null) _inputTextBox.Text = string.Empty;
             }
         }
 
         private void OnRemoveClick(object? sender, RoutedEventArgs e)
         {
-            string text = InputTextBox.Text?.Trim() ?? string.Empty;
-
+            string text = _inputTextBox?.Text?.Trim() ?? string.Empty;
             if (!string.IsNullOrEmpty(text))
             {
                 var itemToRemove = _myItems.FirstOrDefault(i => i == text);
-                if (itemToRemove != null)
-                {
-                    _myItems.Remove(itemToRemove);
-                    InputTextBox.Text = string.Empty;
-                }
+                if (itemToRemove != null) _myItems.Remove(itemToRemove);
             }
-            else if (MyComboBox.SelectedItem is string selectedItem)
+            else if (_myComboBox?.SelectedItem is string selectedItem)
             {
                 _myItems.Remove(selectedItem);
             }
